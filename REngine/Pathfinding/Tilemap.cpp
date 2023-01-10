@@ -11,6 +11,13 @@ namespace
 void Tilemap::LoadTileMap(const char* tileMap, int tileSize)
 {
 	//Implement this
+
+	//TODO
+	mGridBasedGraph.Initialize(mColumns, mRows);
+	//for()
+	//	for()
+	//		//Connect the nodes to it's neighbors
+	//		mGridBasedGraph.GetNode(4, 5)->neighbors[AI::GridBasedGraph::Directions::East] = mGridBasedGraph.GetNode(5, 5);
 }
 
 void Tilemap::LoadTiles(const char* tilesPath)
@@ -21,4 +28,6 @@ void Tilemap::LoadTiles(const char* tilesPath)
 void Tilemap::Render()
 {
 	//Implement This
+
+	//DrawLine()
 }

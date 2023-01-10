@@ -1,3 +1,4 @@
+#include "pch.h"
 /**********************************************************************************************
 *
 *   raylibExtras * Utilities and Shared Components for Raylib
@@ -28,20 +29,6 @@
 *
 **********************************************************************************************/
 #include "RayLibImGui.h"
-
-#include "imgui.h"
-#include "raylib.h"
-#include "rlgl.h"
-
-#ifdef PLATFORM_DESKTOP
-#include <GLFW/glfw3.h>
-#endif
-
-#include <math.h>
-
-#ifndef NO_FONT_AWESOME
-#include "FA6FreeSolidFontData.h"
-#endif
 
 static Texture2D FontTexture;
 

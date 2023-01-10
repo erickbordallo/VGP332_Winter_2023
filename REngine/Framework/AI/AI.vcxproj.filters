@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Inc">
+      <UniqueIdentifier>{81ed95e4-5456-4997-bdb1-e95b82531b11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src">
+      <UniqueIdentifier>{cbf41ee7-9993-4a1f-a17c-718c6ba06bd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inc\Pathfinding">
+      <UniqueIdentifier>{8eab861f-4a84-4b59-8b21-23d03d243197}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Pathfinding">
+      <UniqueIdentifier>{3206ce26-a3be-4bd4-9dc3-544db4532a4f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Inc\AI.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Common.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Precompiled.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Test.h">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\GridBasedGraph.h">
+      <Filter>Inc\Pathfinding</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\Precompiled.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Test.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GridBasedGraph.cpp">
+      <Filter>Src\Pathfinding</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

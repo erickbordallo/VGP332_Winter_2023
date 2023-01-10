@@ -30,9 +30,6 @@
 
 #pragma once
 
-#include "raylib.h"
-#include "imgui.h"
-
 namespace rlImGuiColors
 {
     inline ImVec4 Convert(::Color color)

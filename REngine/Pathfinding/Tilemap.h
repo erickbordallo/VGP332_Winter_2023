@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector>
 #include <REngine.h>
+#include <AI.h>
 
 class Tilemap
 {
@@ -13,6 +13,8 @@ public:
 private:
 	std::vector<int> mTileMap;
 	std::vector<Texture2D> mTileMapTextures;
+
+	AI::GridBasedGraph mGridBasedGraph;
 	int mRows;
 	int mColumns;
 	int mTileSize;
