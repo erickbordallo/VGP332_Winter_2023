@@ -11,5 +11,5 @@ extern void Start(const char* windowTitle, int width, int height);
 extern void Run(bool (*gameLoop)(), void (*uiDebugUpdate)());
 extern void Run(bool (*gameLoop)());
 extern void Stop();
-extern const char* ResourcesFullPath(const std::string& imageName);
+extern void ResourcesFullPath(const std::string& imageName, std::string& fullPath);
 }
