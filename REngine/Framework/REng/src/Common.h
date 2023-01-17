@@ -3,9 +3,11 @@
 #include <assert.h>
 #include <imgui.h>
 #include <iostream>
+#include <fstream>
 #include <math.h>
 #include <raylib.h>
 #include <string>
+#include <sstream>
 #include <vector>
 
 #include <rlgl.h>
