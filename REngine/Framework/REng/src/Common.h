@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <imgui.h>
 #include <iostream>
+#include <functional>
 #include <fstream>
 #include <math.h>
 #include <raylib.h>

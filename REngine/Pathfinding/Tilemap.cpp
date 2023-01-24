@@ -10,6 +10,8 @@ namespace
 	}
 }
 
+void TestStdFunctions();
+
 void Tilemap::LoadTileMap(const char* tileMap)
 {
 	std::fstream file;
@@ -231,11 +233,53 @@ void Tilemap::Render()
 		sY += tileSize;
 	}
 
+	/*for (mClosedList)
+	{
+		DrawLine(mClosedList[i], mClosedList[i].parent)
+	}*/
+
 }
 
 bool Tilemap::IsBlocked(int x, int y) const
 {
 	return mTiles[mTileMap[ToIndex(x, y, mColumns)]].weight >= 5;
+}
+
+float Tilemap::GetCost(const AI::GridBasedGraph::Node* nodeA) const 
+{
+	const int tileIndex = ToIndex(nodeA->column, nodeA->row, mColumns);
+	return mTiles[mTileMap[tileIndex]].weight;
+}
+
+std::vector<REng::Math::Vector2> Tilemap::FindPathDijkstra(int startX, int startY, int endX, int endY)
+{
+	std::vector<REng::Math::Vector2> path;
+	NodeList closedList;
+
+	Dijkstra dijkstra;
+	auto getCostWrapper = [&](const GridBasedGraph::Node* nodeA)
+	{
+		return GetCost(nodeA);
+	};
+
+	if (dijkstra.Run(mGridBasedGraph, startX, startY, endX, endY, getCostWrapper))
+	{
+		closedList = dijkstra.GetClosedList();
+		auto node = closedList.back();
+		while (node != nullptr)
+		{
+			path.push_back(GetPixelPosition(node->column, node->row));
+			node = node->parent;
+		}
+		std::reverse(path.begin(), path.end());
+	}
+	else
+	{
+		mClosedList = dijkstra.GetClosedList();
+	}
+
+	return path;
+
 }
 
 //Physically
@@ -321,5 +365,51 @@ void TestLambda()
 	func();
 
 	[&] {return a + b; }();
+}
+#pragma endregion
+
+#pragma region std::function
+
+float Function(int a, int b)
+{
+	return a * b;
+}
+
+struct Functor
+{
+	float operator()(int a, int b)
+	{
+		return a * b;
+	}
+
+	float Function(int a, int b)
+	{
+		return a * b;
+	}
+};
+
+using Func = std::function<float(int, int)>;
+Func myFunc;
+
+void TestStdFunctions()
+{
+
+	/* = Function;
+	float ans1 = myFunc(4, 2);
+
+	myFunc = Functor();
+	float ans2 = myFunc(4, 3);
+
+	myFunc = [](int a, int b) -> float { return a * b; };
+	float ans3 = myFunc(4, 2);
+
+	myFunc = Functor::Function;*/
+
+	
+	/*{
+		myFunc = Function;
+	}
+	
+	float ans = myFunc(4, 1);*/
 }
 #pragma endregion
