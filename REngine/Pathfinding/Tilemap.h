@@ -34,3 +34,17 @@ private:
 	int mRows;
 	int mColumns;
 };
+
+//class PureVirtual
+//{
+//public:
+//	virtual int GetId() const = 0;
+//	float GetSpeed() { return 3.0f; }
+//	virtual int GetAge() { return 0; }
+//};
+//
+//class PureVirtualChild : public PureVirtual
+//{
+//public:
+//	int GetAge() { return 32; }
+//};
