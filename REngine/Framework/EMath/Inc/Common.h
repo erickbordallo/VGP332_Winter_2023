@@ -1,15 +1,10 @@
-#pragma once
-#include <array>
-#include <assert.h>
 #include <iostream>
-#include <functional>
-#include <list>
+#include <limits>
+#include <math.h>
+#include <stdio.h>
 #include <vector>
-#include <string>
 
-#include <EMath.h>
-
-#define AIAssert(condition, message) \
+#define MathAssert(condition, message) \
     do { \
         if (! (condition)) { \
             std::cerr << "Assertion `" #condition "` failed in " << __FILE__ \

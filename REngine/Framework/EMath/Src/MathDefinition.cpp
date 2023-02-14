@@ -1,28 +1,26 @@
-#include "pch.h"
+#include "Precompiled.h"
+#include "MathDefinition.h"
 
-#include "RMath.h"
-
-using namespace REng;
-using namespace REng::Math;
+using namespace EMath;
 
 //====================================================================================================
 // Constants
 //====================================================================================================
 
-const float Math::kPi = 3.14159265358979f;
-const float Math::kTwoPi = 6.28318530717958f;
-const float Math::kPiByTwo = 1.57079632679489f;
-const float Math::kRootTwo = 1.41421356237309f;
-const float Math::kRootThree = 1.73205080756887f;
-const float Math::kDegToRad = kPi / 180.0f;
-const float Math::kRadToDeg = 180.0f / kPi;
+const float EMath::kPi = 3.14159265358979f;
+const float EMath::kTwoPi = 6.28318530717958f;
+const float EMath::kPiByTwo = 1.57079632679489f;
+const float EMath::kRootTwo = 1.41421356237309f;
+const float EMath::kRootThree = 1.73205080756887f;
+const float EMath::kDegToRad = kPi / 180.0f;
+const float EMath::kRadToDeg = 180.0f / kPi;
 
 //====================================================================================================
 // Function Definitions
 //====================================================================================================
 
 
-Matrix4 Math::MatrixRotationAxis(const Vector3& axis, float rad)
+Matrix4 EMath::MatrixRotationAxis(const Vector3& axis, float rad)
 {
 	const Vector3 u = Normalize(axis);
 	const float x = u.x;
@@ -57,7 +55,7 @@ Matrix4 Math::MatrixRotationAxis(const Vector3& axis, float rad)
 
 //----------------------------------------------------------------------------------------------------
 
-Matrix4 Math::QuaternionToMatrix(const Quaternion& q)
+Matrix4 EMath::QuaternionToMatrix(const Quaternion& q)
 {
 	return Matrix4
 	(
@@ -85,10 +83,10 @@ Matrix4 Math::QuaternionToMatrix(const Quaternion& q)
 
 //----------------------------------------------------------------------------------------------------
 
-Math::Quaternion Math::Slerp(const Quaternion& q0, const Quaternion& q1, float t)
+EMath::Quaternion EMath::Slerp(const Quaternion& q0, const Quaternion& q1, float t)
 {
-	Quaternion q_0{ Math::Normalize(q0) };
-	Quaternion q_1{ Math::Normalize(q1) };
+	Quaternion q_0{ EMath::Normalize(q0) };
+	Quaternion q_1{ EMath::Normalize(q1) };
 	//Find the dot product 
 	float dot = (q_0.x * q_1.x) + (q_0.y * q_1.y) + (q_0.z * q_1.z) + (q_0.w * q_1.w);
 
@@ -117,7 +115,7 @@ Math::Quaternion Math::Slerp(const Quaternion& q0, const Quaternion& q1, float t
 	return (q_0 * s0) + (q_1 * s1);
 }
 //----------------------------------------------------------------------------------------------------
-Math::Quaternion Math::EulerToQuaternion(float x, float y, float z)
+EMath::Quaternion EMath::EulerToQuaternion(float x, float y, float z)
 {
 	Quaternion q;
 	float sx, sy, sz;
@@ -137,7 +135,7 @@ Math::Quaternion Math::EulerToQuaternion(float x, float y, float z)
 
 //----------------------------------------------------------------------------------------------------
 
-Math::Vector3 Math::QuaternionToEuler(const Quaternion& q1)
+EMath::Vector3 EMath::QuaternionToEuler(const Quaternion& q1)
 {
 	Vector3 eulerAngles;
 
@@ -169,7 +167,7 @@ Math::Vector3 Math::QuaternionToEuler(const Quaternion& q1)
 }
 //----------------------------------------------------------------------------------------------------
 
-Math::Quaternion Math::Conjugate(Quaternion q0)
+EMath::Quaternion EMath::Conjugate(Quaternion q0)
 {
 	Quaternion q1;
 	q1.w = q0.w;
@@ -181,7 +179,7 @@ Math::Quaternion Math::Conjugate(Quaternion q0)
 }
 
 //----------------------------------------------------------------------------------------------------
-Math::Quaternion Math::Inverse(Quaternion q0)
+EMath::Quaternion EMath::Inverse(Quaternion q0)
 {
 	Quaternion qInverse = Conjugate(q0) / MagnitudeSqr(q0);
 
@@ -189,11 +187,11 @@ Math::Quaternion Math::Inverse(Quaternion q0)
 }
 
 //----------------------------------------------------------------------------------------------------
-Math::Quaternion Math::LookRotation(const Vector3& look, const Vector3& up)
+EMath::Quaternion EMath::LookRotation(const Vector3& look, const Vector3& up)
 {
-	Vector3 forward = Math::Normalize(look);
-	Vector3 vector2 = Math::Normalize(Math::Cross(up, forward));
-	Vector3 vector3 = Math::Cross(forward, vector2);
+	Vector3 forward = EMath::Normalize(look);
+	Vector3 vector2 = EMath::Normalize(EMath::Cross(up, forward));
+	Vector3 vector3 = EMath::Cross(forward, vector2);
 
 	float m00 = vector2.x;
 	float m01 = vector2.y;
@@ -256,7 +254,7 @@ Math::Quaternion Math::LookRotation(const Vector3& look, const Vector3& up)
 
 //----------------------------------------------------------------------------------------------------
 
-Math::Quaternion Math::FromToQuaternion(const Vector3& from, const Vector3& to)
+EMath::Quaternion EMath::FromToQuaternion(const Vector3& from, const Vector3& to)
 {
 	Vector3 normalizedFrom = Normalize(from);
 	Vector3 normalizedTo = Normalize(to);
@@ -268,7 +266,7 @@ Math::Quaternion Math::FromToQuaternion(const Vector3& from, const Vector3& to)
 }
 
 //----------------------------------------------------------------------------------------------------
-Math::Quaternion Math::QuaternionFromAxisAngle(const Vector3& axis, float angleDegrees)
+EMath::Quaternion EMath::QuaternionFromAxisAngle(const Vector3& axis, float angleDegrees)
 {
 	Quaternion q;
 	float angleRadians = angleDegrees * kDegToRad;
@@ -283,7 +281,7 @@ Math::Quaternion Math::QuaternionFromAxisAngle(const Vector3& axis, float angleD
 }
 
 //----------------------------------------------------------------------------------------------------
-Math::Quaternion Math::QuaternionFromMatrix(const Matrix4& mat)
+EMath::Quaternion EMath::QuaternionFromMatrix(const Matrix4& mat)
 {
 	Matrix4 rotationMatrix = Transpose(mat);
 	Quaternion q;
@@ -333,7 +331,7 @@ Math::Quaternion Math::QuaternionFromMatrix(const Matrix4& mat)
 
 //----------------------------------------------------------------------------------------------------
 
-bool Math::PointInRect(const Vector2& point, const Rect& rect)
+bool EMath::PointInRect(const Vector2& point, const Rect& rect)
 {
 	if (point.x > rect.right || point.x < rect.left ||
 		point.y > rect.bottom || point.y < rect.top)
@@ -345,7 +343,7 @@ bool Math::PointInRect(const Vector2& point, const Rect& rect)
 
 //----------------------------------------------------------------------------------------------------
 
-bool Math::PointInCircle(const Vector2& point, const Circle& circle)
+bool EMath::PointInCircle(const Vector2& point, const Circle& circle)
 {
 	const Vector2 centerToPoint = point - circle.center;
 	const float distSqr = Dot(centerToPoint, centerToPoint);
@@ -355,7 +353,7 @@ bool Math::PointInCircle(const Vector2& point, const Circle& circle)
 
 //----------------------------------------------------------------------------------------------------
 
-bool Math::Intersect(const LineSegment& a, const LineSegment& b)
+bool EMath::Intersect(const LineSegment& a, const LineSegment& b)
 {
 	// http://local.wasp.uwa.edu.au/~pbourke/geometry/lineline2d/
 
@@ -391,7 +389,7 @@ bool Math::Intersect(const LineSegment& a, const LineSegment& b)
 
 //----------------------------------------------------------------------------------------------------
 
-bool Math::Intersect(const Circle& c0, const Circle& c1)
+bool EMath::Intersect(const Circle& c0, const Circle& c1)
 {
 	const float totalRadius = c0.radius + c1.radius;
 	const float totalRadiusSquare = totalRadius * totalRadius;
@@ -401,7 +399,7 @@ bool Math::Intersect(const Circle& c0, const Circle& c1)
 
 //----------------------------------------------------------------------------------------------------
 
-bool Math::Intersect(const Rect& r0, const Rect& r1)
+bool EMath::Intersect(const Rect& r0, const Rect& r1)
 {
 	if (r0.left > r1.right)
 		return false;
@@ -415,7 +413,7 @@ bool Math::Intersect(const Rect& r0, const Rect& r1)
 }
 //----------------------------------------------------------------------------------------------------
 
-bool Math::Intersect(const AABB2D& aabb0, const AABB2D& aabb1)
+bool EMath::Intersect(const AABB2D& aabb0, const AABB2D& aabb1)
 {
 	if (aabb0.Xmin > aabb1.Xmax)
 		return false;
@@ -430,14 +428,14 @@ bool Math::Intersect(const AABB2D& aabb0, const AABB2D& aabb1)
 
 //----------------------------------------------------------------------------------------------------
 
-bool Math::Intersect(const LineSegment& l, const Circle& c)
+bool EMath::Intersect(const LineSegment& l, const Circle& c)
 {
 	return Intersect(c, l);
 }
 
 //----------------------------------------------------------------------------------------------------
 
-bool Math::Intersect(const Circle& c, const LineSegment& l)
+bool EMath::Intersect(const Circle& c, const LineSegment& l)
 {
 	Vector2 startToCenter = c.center - l.from;
 	Vector2 startToEnd = l.to - l.from;
@@ -471,14 +469,14 @@ bool Math::Intersect(const Circle& c, const LineSegment& l)
 
 //----------------------------------------------------------------------------------------------------
 
-bool Math::Intersect(const Circle& c, const Rect& r)
+bool EMath::Intersect(const Circle& c, const Rect& r)
 {
 	return Intersect(r, c);
 }
 
 //----------------------------------------------------------------------------------------------------
 
-bool Math::Intersect(const Rect& r, const Circle& c)
+bool EMath::Intersect(const Rect& r, const Circle& c)
 {
 	Vector2 closestPoint;
 	closestPoint.x = Clamp(c.center.x, r.left, r.right);
@@ -494,7 +492,7 @@ bool Math::Intersect(const Rect& r, const Circle& c)
 
 //----------------------------------------------------------------------------------------------------
 
-bool Math::Intersect(const Ray& ray, const Vector3& a, const Vector3& b, const Vector3& c, float& distance)
+bool EMath::Intersect(const Ray& ray, const Vector3& a, const Vector3& b, const Vector3& c, float& distance)
 {
 	// Reference: https://en.wikipedia.org/wiki/M%C3%B6ller%E2%80%93Trumbore_intersection_algorithm
 
@@ -553,7 +551,7 @@ bool Math::Intersect(const Ray& ray, const Vector3& a, const Vector3& b, const V
 
 //----------------------------------------------------------------------------------------------------
 
-bool Math::Intersect(const Ray& ray, const Plane& plane, float& distance)
+bool EMath::Intersect(const Ray& ray, const Plane& plane, float& distance)
 {
 	const float orgDotN = Dot(ray.org, plane.n);
 	const float dirDotN = Dot(ray.dir, plane.n);
@@ -579,7 +577,7 @@ bool Math::Intersect(const Ray& ray, const Plane& plane, float& distance)
 
 //----------------------------------------------------------------------------------------------------
 
-bool Math::Intersect(const Ray& ray, const AABB& aabb, float& distEntry, float& distExit)
+bool EMath::Intersect(const Ray& ray, const AABB& aabb, float& distEntry, float& distExit)
 {
 	// https://truesculpt.googlecode.com/hg-history/Release%25200.8/Doc/ray_box_intersect.pdf
 
@@ -663,7 +661,7 @@ bool Math::Intersect(const Ray& ray, const AABB& aabb, float& distEntry, float& 
 
 //----------------------------------------------------------------------------------------------------
 
-//bool Math::Intersect(const Ray& ray, const OBB& obb, float& distEntry, float& distExit)
+//bool EMath::Intersect(const Ray& ray, const OBB& obb, float& distEntry, float& distExit)
 //{
 //	// Compute the local-to-world/world-to-local matrices
 //	Matrix4 matTrans = Matrix4::Translation(obb.center.x, obb.center.y, obb.center.z);
@@ -676,12 +674,12 @@ bool Math::Intersect(const Ray& ray, const AABB& aabb, float& distEntry, float& 
 //	Vector3 dir = TransformNormal(ray.dir, matWorldInv);
 //
 //	AABB aabb(Vector3::Zero(), obb.extend);
-//	return Math::Intersect(Ray(org, dir), aabb, distEntry, distExit);
+//	return EMath::Intersect(Ray(org, dir), aabb, distEntry, distExit);
 //}
 
 //----------------------------------------------------------------------------------------------------
 
-bool Math::Intersect(const Vector3& point, const AABB& aabb)
+bool EMath::Intersect(const Vector3& point, const AABB& aabb)
 {
 	const Vector3 test = point - aabb.center;
 	if (abs(test.x) > aabb.extend.x) return false;
@@ -692,7 +690,7 @@ bool Math::Intersect(const Vector3& point, const AABB& aabb)
 
 //----------------------------------------------------------------------------------------------------
 
-//bool Math::Intersect(const Vector3& point, const OBB& obb)
+//bool EMath::Intersect(const Vector3& point, const OBB& obb)
 //{
 //	// Compute the local-to-world/world-to-local matrices
 //	Matrix4 matTrans = Matrix4::Translation(obb.center.x, obb.center.y, obb.center.z);
@@ -705,11 +703,11 @@ bool Math::Intersect(const Vector3& point, const AABB& aabb)
 //	AABB aabb(Vector3::Zero(), obb.extend);
 //
 //	// Test against local AABB
-//	return Math::Intersect(localPoint, aabb);
+//	return EMath::Intersect(localPoint, aabb);
 //}
 //----------------------------------------------------------------------------------------------------
 
-Rect Math::GetAABB2DIntersectionRect(const AABB2D& aabb0, const AABB2D& aabb1)
+Rect EMath::GetAABB2DIntersectionRect(const AABB2D& aabb0, const AABB2D& aabb1)
 {
 	Rect intersection;
 
@@ -721,7 +719,7 @@ Rect Math::GetAABB2DIntersectionRect(const AABB2D& aabb0, const AABB2D& aabb1)
 	return intersection;
 }
 
-Math::Vector3 Math::GetClosestPoint(const Ray& ray, const Vector3& point)
+EMath::Vector3 EMath::GetClosestPoint(const Ray& ray, const Vector3& point)
 {
 	Vector3 orgToPoint = point - ray.org;
 	float d = Dot(orgToPoint, ray.dir);
@@ -730,7 +728,7 @@ Math::Vector3 Math::GetClosestPoint(const Ray& ray, const Vector3& point)
 
 //----------------------------------------------------------------------------------------------------
 
-Math::Vector3 Math::Mean(const Vector3* v, uint32_t count)
+EMath::Vector3 EMath::Mean(const Vector3* v, uint32_t count)
 {
 	Vector3 mean(0.0f, 0.0f, 0.0f);
 	for (uint32_t i = 0; i < count; ++i)
@@ -740,12 +738,12 @@ Math::Vector3 Math::Mean(const Vector3* v, uint32_t count)
 	return mean / (float)count;
 }
 
-float Math::RandomFloat(float min, float max)
+float EMath::RandomFloat(float min, float max)
 {
 	//srand(time(NULL));
 	// this  function assumes max > min, you may want 
 	// more robust error checking for a non-debug build
-	assert(max > min, "[Math] Invalid parameters. Max should be greater than Min.");
+	MathAssert(max > min, "[EMath] Invalid parameters. Max should be greater than Min.");
 	float random = ((float)rand()) / (float)RAND_MAX;
 
 	// generate (in your case) a float between 0 and (4.5-.78)
@@ -754,21 +752,21 @@ float Math::RandomFloat(float min, float max)
 	return (random * range) + min;
 }
 
-int Math::RandomInt(int min, int max)
+int EMath::RandomInt(int min, int max)
 {
 	//srand(time(NULL));
-	assert(max > min, "[Math] Invalid parameters. Max should be greater than Min.");
+	MathAssert(max > min, "[EMath] Invalid parameters. Max should be greater than Min.");
 	return rand() % max + min;
 }
 
-Math::Vector3 Math::VecMax(const Vector3& a, const Vector3& b)
+EMath::Vector3 EMath::VecMax(const Vector3& a, const Vector3& b)
 {
 	Vector3 result;
 	result = { std::max(a.x, b.x), std::max(a.y, b.y) , std::max(a.z, b.z) };
 	return result;
 }
 
-Math::Vector3 Math::VecMin(const Vector3& a, const Vector3& b)
+EMath::Vector3 EMath::VecMin(const Vector3& a, const Vector3& b)
 {
 	Vector3 result;
 	result = { std::min(a.x, b.x), std::min(a.y, b.y) , std::min(a.z, b.z) };

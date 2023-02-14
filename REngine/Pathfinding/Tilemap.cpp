@@ -103,7 +103,7 @@ void Tilemap::LoadTileMap(const char* tileMap)
 	}
 }
 
-REng::Math::Vector2 Tilemap::GetPixelPosition(int x, int y) const
+EMath::Vector2 Tilemap::GetPixelPosition(int x, int y) const
 {
 	return
 	{
@@ -112,9 +112,9 @@ REng::Math::Vector2 Tilemap::GetPixelPosition(int x, int y) const
 	};
 }
 
-std::vector<REng::Math::Vector2> Tilemap::FindPath(int startX, int startY, int endX, int endY)
+std::vector<EMath::Vector2> Tilemap::FindPath(int startX, int startY, int endX, int endY)
 {
-	std::vector<REng::Math::Vector2> path;
+	std::vector<EMath::Vector2> path;
 	NodeList closedList;
 
 	BFS bfs;
@@ -169,8 +169,8 @@ void Tilemap::LoadTiles(const char* tilesPath)
 
 		weight = atoi(weightText.c_str());
 
-		std::string tileFullPath;
-		REng::ResourcesFullPath(path, tileFullPath);
+		
+		std::string tileFullPath = REng::ResourcesFullPath(path);
 		Tile newTile;
 		newTile.texture = LoadTexture(tileFullPath.c_str());
 		newTile.weight = weight;
@@ -182,7 +182,7 @@ void Tilemap::LoadTiles(const char* tilesPath)
 
 void Tilemap::Render()
 {
-	REng::Math::Vector2 position(0.0f, 0.0f);
+	EMath::Vector2 position(0.0f, 0.0f);
 
 	/// <summary>
 	/// Rendering Tiles
@@ -212,7 +212,7 @@ void Tilemap::Render()
 	/// </summary>
 	const int tileSize = 32;
 	constexpr float halfSize = static_cast<float>(tileSize) * 0.5f;
-	REng::Math::Vector2 startingPosition(halfSize, halfSize);
+	EMath::Vector2 startingPosition(halfSize, halfSize);
 	float sX = startingPosition.x;
 	float sY = startingPosition.y;
 	for (int y = 0; y < mRows; ++y)
@@ -251,9 +251,9 @@ float Tilemap::GetCost(const AI::GridBasedGraph::Node* nodeA) const
 	return mTiles[mTileMap[tileIndex]].weight;
 }
 
-std::vector<REng::Math::Vector2> Tilemap::FindPathDijkstra(int startX, int startY, int endX, int endY)
+std::vector<EMath::Vector2> Tilemap::FindPathDijkstra(int startX, int startY, int endX, int endY)
 {
-	std::vector<REng::Math::Vector2> path;
+	std::vector<EMath::Vector2> path;
 	NodeList closedList;
 
 	Dijkstra dijkstra;

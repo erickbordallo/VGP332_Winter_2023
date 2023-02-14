@@ -19,6 +19,9 @@
     <Filter Include="Src\World">
       <UniqueIdentifier>{bcec2968-886a-4938-b350-46630b5bf3ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inc\FSM">
+      <UniqueIdentifier>{778a0e5a-9c35-4b85-a963-be2746de247f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inc\AI.h">
@@ -48,6 +51,15 @@
     <ClInclude Include="Inc\AIWorld.h">
       <Filter>Inc\World</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\Agent.h">
+      <Filter>Inc\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\State.h">
+      <Filter>Inc\FSM</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\StateMachine.h">
+      <Filter>Inc\FSM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
@@ -69,6 +81,9 @@
       <Filter>Src\World</Filter>
     </ClCompile>
     <ClCompile Include="Src\AIWorld.cpp">
+      <Filter>Src\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Agent.cpp">
       <Filter>Src\World</Filter>
     </ClCompile>
   </ItemGroup>

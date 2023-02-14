@@ -3,7 +3,6 @@
 namespace AI
 {
 	class AIWorld;
-	using EntityPtrs = std::vector<Entity*>;
 	class Entity
 	{
 	public:
@@ -16,14 +15,12 @@ namespace AI
 		Entity& operator=(Entity&&) = delete;
 
 		AIWorld& world;
-		float x = 0.0f;
-		float y = 0.0f;
-		float headingX = 0.0f;
-		float headingY = 1.0f;
+		EMath::Vector2 position = EMath::Vector2::Zero();
+		EMath::Vector2 heading = EMath::Vector2::YAxis();
 		float radius = 1.0f;
 
 		uint32_t GetTypeID() const { return static_cast<uint32_t>(mUniqueID >> 32); }
-		uint64_t GetUNiqueID() const { return mUniqueID; }
+		uint64_t GetUniqueID() const { return mUniqueID; }
 
 	private:
 		const uint64_t mUniqueID = 0;
