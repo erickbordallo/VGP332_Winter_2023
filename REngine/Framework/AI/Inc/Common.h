@@ -8,6 +8,7 @@
 #include <string>
 
 #include <EMath.h>
+#include <raylib.h>
 
 #define AIAssert(condition, message) \
     do { \
