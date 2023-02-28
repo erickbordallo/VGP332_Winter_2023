@@ -1,3 +1,4 @@
+#pragma once
 #include "SteeringBehavior.h"
 
 namespace AI

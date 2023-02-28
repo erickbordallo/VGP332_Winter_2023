@@ -75,12 +75,12 @@
     <ClInclude Include="Inc\SeekBehavior.h">
       <Filter>Inc\FSM</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\WanderBehavior.h">
+      <Filter>Inc\Steering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Precompiled.cpp">
-      <Filter>Src</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Test.cpp">
       <Filter>Src</Filter>
     </ClCompile>
     <ClCompile Include="Src\GridBasedGraph.cpp">
@@ -105,6 +105,9 @@
       <Filter>Src\Steering</Filter>
     </ClCompile>
     <ClCompile Include="Src\SeekBehavior.cpp">
+      <Filter>Src\Steering</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\WanderBehavior.cpp">
       <Filter>Src\Steering</Filter>
     </ClCompile>
   </ItemGroup>

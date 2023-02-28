@@ -1,6 +1,10 @@
 #include "Spaceship.h"
 #include "TypeIds.h"
 
+extern float wanderRadius;
+extern float wanderDistance;
+extern float wanderJitter;
+
 Spaceship::Spaceship(AI::AIWorld& world)
 	: Agent(world, Types::Spaceship)
 {}
@@ -11,8 +15,14 @@ void Spaceship::Load()
 
 	mSteeringModule = std::make_unique<AI::SteeringModule>(*this);
 	mSeekBehavior = mSteeringModule->AddBehavior<AI::SeekBehavior>();
-	mSeekBehavior->SetActive(true);
-	mSeekBehavior->ShowDebug(true);
+	mWanderBehavior = mSteeringModule->AddBehavior<AI::WanderBehavior>();
+	//mSeekBehavior->SetActive(false);
+	mWanderBehavior->SetActive(true);
+
+
+	//mSeekBehavior->ShowDebug(true);
+	mWanderBehavior->ShowDebug(true);
+
 
 	for (int i = 0; i < mTextures.size(); ++i)
 	{
@@ -29,6 +39,11 @@ void Spaceship::Unload()
 
 void Spaceship::Update(float deltaTime)
 {
+	if (mWanderBehavior->IsActive())
+	{
+		mWanderBehavior->Setup(wanderRadius, wanderDistance, wanderJitter);
+	}
+
 	const auto force = mSteeringModule->Calculate();
 	const auto acceleration = force / mass;
 	velocity += acceleration * deltaTime;

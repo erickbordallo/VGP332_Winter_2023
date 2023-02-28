@@ -5,6 +5,7 @@ namespace AI
 	class Entity;
 	using EntityPtrs = std::vector<Entity*>;
 
+	using Obstacles = std::vector<EMath::Circle>;
 	class AIWorld
 	{
 	public:
@@ -19,8 +20,12 @@ namespace AI
 			return mNextId++;
 		}
 
+		void AddObstacles(EMath::Circle circle) { mObstacles.push_back(circle); }
+		Obstacles GetObstacles() const { return mObstacles; }
+
 	private:
 		EntityPtrs mEntities;
+		Obstacles mObstacles;
 		mutable uint32_t mNextId = 0;
 	};
 }

@@ -15,7 +15,7 @@ EMath::Vector2 SteeringModule::Calculate()
 	{
 		if (behavior->IsActive())
 		{
-			totalForce += behavior->Calculate(mAgent);
+			totalForce += behavior->Calculate(mAgent) * behavior->GetWeight();
 		}
 	}
 
